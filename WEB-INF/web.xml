@@ -1,0 +1,26 @@
+<web-app>
+
+   <!-- General description of your Web application -->
+   <display-name>
+      CNT 4714 Spring 2023 Project 4 Enterprise System
+   </display-name>
+
+   <description>
+       A Servlet/JPS-based Multi-tiered Enterprise Application Using a Tomcat
+        Container
+   </description>
+
+   <!-- Servlet definitions and mappings  -->
+
+      <servlet>
+         <servlet-name>authentication</servlet-name>
+         <description> A servlet that handles user authentication. </description>
+         <servlet-class> authenticationServlet  </servlet-class>
+      </servlet>
+
+               <servlet-mapping>
+                  <servlet-name>authentication</servlet-name>
+                  <url-pattern>/auth</url-pattern>
+               </servlet-mapping>
+
+</web-app>
