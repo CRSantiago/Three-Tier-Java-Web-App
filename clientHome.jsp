@@ -1,3 +1,9 @@
+<% String testing = (String) session.getAttribute("testing"); if(testing ==
+null){testing="";} String testingStatement = (String)
+session.getAttribute("testingStatement"); if(testingStatement ==
+null){testingStatement="";} String table = (String)
+session.getAttribute("table"); if(table == null){table="";} %>
+
 <html>
   <head>
     <style>
@@ -19,6 +25,7 @@
         font-family: 'Roboto', sans-serif;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         border-radius: 25px;
+        overflow-y: scroll;
       }
       .top-div {
         display: flex;
@@ -143,15 +150,20 @@
       <div class="text-div">
         <p>
           You are connected to the Project 4 Enterprise System database as a
-          <span class="user-text">root-level</span> user.
+          <span class="user-text">client-level</span> user.
         </p>
         <p>
           Please enter any valid SQL query or update command in the box below.
         </p>
       </div>
       <div class="form-div">
-        <form action="/">
-          <textarea autofocus rows="50" cols="150" name="query"></textarea>
+        <form action="/CNT4714-Project4/clientuser" method="POST">
+          <textarea
+            autofocus
+            rows="50"
+            cols="150"
+            name="sqlStatement"
+          ></textarea>
           <div class="form-buttons">
             <button
               class="executeBtn"
@@ -174,6 +186,9 @@
       <hr class="break" />
       <div>
         <p><strong>Database Results:</strong></p>
+        <p><%=testingStatement%></p>
+        <p><%=testing%></p>
+        <%=table%>
       </div>
     </div>
   </body>

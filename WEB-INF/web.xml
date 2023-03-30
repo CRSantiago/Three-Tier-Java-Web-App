@@ -23,4 +23,15 @@
                   <url-pattern>/auth</url-pattern>
                </servlet-mapping>
 
+      <servlet>
+         <servlet-name>ClientUser</servlet-name>
+         <description> A servlet that handles client user sql commands. </description>
+         <servlet-class> ClientUserServlet  </servlet-class>
+      </servlet>
+
+               <servlet-mapping>
+                  <servlet-name>ClientUser</servlet-name>
+                  <url-pattern>/clientuser</url-pattern>
+               </servlet-mapping>
+
 </web-app>

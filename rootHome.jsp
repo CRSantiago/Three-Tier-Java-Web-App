@@ -143,7 +143,7 @@
       <div class="text-div">
         <p>
           You are connected to the Project 4 Enterprise System database as a
-          <span class="user-text">client-level</span> user.
+          <span class="user-text">root-level</span> user.
         </p>
         <p>
           Please enter any valid SQL query or update command in the box below.
@@ -151,7 +151,12 @@
       </div>
       <div class="form-div">
         <form action="/">
-          <textarea autofocus rows="50" cols="150" name="query"></textarea>
+          <textarea
+            autofocus
+            rows="50"
+            cols="150"
+            name="sqlStatement"
+          ></textarea>
           <div class="form-buttons">
             <button
               class="executeBtn"
