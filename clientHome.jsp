@@ -1,7 +1,5 @@
-<% String testing = (String) session.getAttribute("testing"); if(testing ==
-null){testing="";} String testingStatement = (String)
-session.getAttribute("testingStatement"); if(testingStatement ==
-null){testingStatement="";} String table = (String)
+<% String returnMessage = (String) session.getAttribute("returnMessage");
+if(returnMessage == null){returnMessage="";} String table = (String)
 session.getAttribute("table"); if(table == null){table="";} %>
 
 <html>
@@ -135,6 +133,40 @@ session.getAttribute("table"); if(table == null){table="";} %>
         background-color: #555555;
         color: white;
       }
+
+      table,
+      th,
+      td {
+        border: 1px solid;
+      }
+      table {
+        width: 100%;
+        margin-bottom: 1.5em;
+      }
+      th {
+        padding: 15px;
+      }
+      tr {
+        height: 50px;
+      }
+      td {
+        text-align: center;
+        padding: 15px;
+      }
+      .sql-error-message {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: crimson;
+        padding: 10px;
+        color: white;
+        text-align: center;
+        border: 3px solid black;
+      }
+
+      .sql-error-message p {
+        margin-top: 0px;
+      }
     </style>
   </head>
   <body>
@@ -186,9 +218,13 @@ session.getAttribute("table"); if(table == null){table="";} %>
       <hr class="break" />
       <div>
         <p><strong>Database Results:</strong></p>
-        <p><%=testingStatement%></p>
-        <p><%=testing%></p>
-        <%=table%>
+
+        <div <% if (!returnMessage.isEmpty()) { %>
+          class="sql-error-message"<%} else {%>style="display:none" <%}%>>
+          <h4>Error in executing SQL statement:</h4>
+          <p><%=returnMessage%></p>
+        </div>
+        <div id="table"><%=table%></div>
       </div>
     </div>
   </body>
