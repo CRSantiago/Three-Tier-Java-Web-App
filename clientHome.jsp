@@ -1,6 +1,8 @@
 <% String returnMessage = (String) session.getAttribute("returnMessage");
 if(returnMessage == null){returnMessage="";} String table = (String)
-session.getAttribute("table"); if(table == null){table="";} %>
+session.getAttribute("table"); if(table == null){table="";} String sqlStatement
+= (String) request.getParameter("sqlStatement"); if(sqlStatement ==
+null){sqlStatement="empty";}%>
 
 <html>
   <head>
@@ -190,12 +192,9 @@ session.getAttribute("table"); if(table == null){table="";} %>
       </div>
       <div class="form-div">
         <form action="/CNT4714-Project4/clientuser" method="POST">
-          <textarea
-            autofocus
-            rows="50"
-            cols="150"
-            name="sqlStatement"
-          ></textarea>
+          <textarea rows="50" cols="150" name="sqlStatement">
+<%=sqlStatement%></textarea
+          >
           <div class="form-buttons">
             <button
               class="executeBtn"
