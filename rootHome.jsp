@@ -1,3 +1,11 @@
+<% String returnMessage = (String) session.getAttribute("returnMessage");
+if(returnMessage == null){returnMessage="";} String rowsUpdatedMessage =
+(String) session.getAttribute("rowsUpdatedMessage"); if(rowsUpdatedMessage ==
+null){rowsUpdatedMessage="";} String table = (String)
+session.getAttribute("table"); if(table == null){table="";} String sqlStatement
+= (String) request.getParameter("sqlStatement"); if(sqlStatement ==
+null){sqlStatement=" ";}%>
+
 <html>
   <head>
     <style>
@@ -19,6 +27,7 @@
         font-family: 'Roboto', sans-serif;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         border-radius: 25px;
+        overflow-y: scroll;
       }
       .top-div {
         display: flex;
@@ -128,6 +137,55 @@
         background-color: #555555;
         color: white;
       }
+
+      table,
+      th,
+      td {
+        border: 1px solid;
+      }
+      table {
+        width: 100%;
+        margin-bottom: 1.5em;
+      }
+      th {
+        padding: 15px;
+      }
+      tr {
+        height: 50px;
+      }
+      td {
+        text-align: center;
+        padding: 15px;
+      }
+      .sql-updated-message {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: rgb(58, 200, 58);
+        padding: 10px;
+        color: black;
+        text-align: center;
+        border: 3px solid black;
+      }
+
+      .sql-updated-message p {
+        margin-top: 0px;
+      }
+
+      .sql-error-message {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: crimson;
+        padding: 10px;
+        color: white;
+        text-align: center;
+        border: 3px solid black;
+      }
+
+      .sql-error-message p {
+        margin-top: 0px;
+      }
     </style>
   </head>
   <body>
@@ -150,13 +208,10 @@
         </p>
       </div>
       <div class="form-div">
-        <form action="/">
-          <textarea
-            autofocus
-            rows="50"
-            cols="150"
-            name="sqlStatement"
-          ></textarea>
+        <form action="/CNT4714-Project4/rootuser" method="POST">
+          <textarea rows="50" cols="150" name="sqlStatement">
+<%=sqlStatement%></textarea
+          >
           <div class="form-buttons">
             <button
               class="executeBtn"
@@ -179,6 +234,18 @@
       <hr class="break" />
       <div>
         <p><strong>Database Results:</strong></p>
+
+        <div <% if (!rowsUpdatedMessage.isEmpty()) { %>
+          class="sql-updated-message"<%} else {%>style="display:none" <%}%>>
+          <p><%=rowsUpdatedMessage%></p>
+        </div>
+
+        <div <% if (!returnMessage.isEmpty()) { %>
+          class="sql-error-message"<%} else {%>style="display:none" <%}%>>
+          <h4>Error in executing SQL statement:</h4>
+          <p><%=returnMessage%></p>
+        </div>
+        <div id="table"><%=table%></div>
       </div>
     </div>
   </body>

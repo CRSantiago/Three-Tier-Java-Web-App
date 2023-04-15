@@ -34,4 +34,16 @@
                   <url-pattern>/clientuser</url-pattern>
                </servlet-mapping>
 
+      <servlet>
+         <servlet-name>RootUser</servlet-name>
+         <description> A servlet that handles root user sql commands. </description>
+         <servlet-class> RootUserServlet  </servlet-class>
+      </servlet>
+
+               <servlet-mapping>
+                  <servlet-name>RootUser</servlet-name>
+                  <url-pattern>/rootuser</url-pattern>
+               </servlet-mapping>
+
+
 </web-app>

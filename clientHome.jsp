@@ -2,7 +2,7 @@
 if(returnMessage == null){returnMessage="";} String table = (String)
 session.getAttribute("table"); if(table == null){table="";} String sqlStatement
 = (String) request.getParameter("sqlStatement"); if(sqlStatement ==
-null){sqlStatement="empty";}%>
+null){sqlStatement=" ";}%>
 
 <html>
   <head>
