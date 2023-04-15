@@ -60,7 +60,7 @@ public class RootUserServlet extends HttpServlet{
 							      int index = sqlStatement.toLowerCase().indexOf(searchString);
 
 							      if (index != -1) { // If the search string is found
-							        String resultString = sqlStatement.substring(index + searchString.length()).replaceAll("[();]", ""); // get the values for the prepared statement and remove all extra characters
+							        String resultString = sqlStatement.substring(index + searchString.length()).replaceAll("[();'']", ""); // get the values for the prepared statement and remove all extra characters
 							        String[] resultSplit = resultString.split(",");
 							        
 						         // Execute the insert statement
