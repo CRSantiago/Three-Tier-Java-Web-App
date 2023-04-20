@@ -1,3 +1,8 @@
+<% String returnMessage = (String) session.getAttribute("returnMessage");
+if(returnMessage == null){returnMessage="";} String rowsUpdatedMessage =
+(String) session.getAttribute("rowsUpdatedMessage"); if(rowsUpdatedMessage ==
+null){rowsUpdatedMessage="";} %>
+
 <html>
   <head>
     <style>
@@ -44,7 +49,7 @@
       fieldset {
         border: 2px solid #323234;
         width: 95%;
-        height: 15%;
+        height: 20%;
         margin-bottom: 0.5em;
         display: flex;
         justify-content: center;
@@ -116,6 +121,38 @@
         background-color: #555555;
         color: white;
       }
+
+      .sql-updated-message {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: rgb(58, 200, 58);
+        padding: 10px;
+        color: black;
+        text-align: center;
+        border: 3px solid black;
+        margin-bottom: 1em;
+      }
+
+      .sql-updated-message p {
+        margin-top: 0px;
+      }
+
+      .sql-error-message {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: crimson;
+        padding: 10px;
+        color: white;
+        text-align: center;
+        border: 3px solid black;
+        margin-bottom: 1em;
+      }
+
+      .sql-error-message p {
+        margin-top: 0px;
+      }
     </style>
   </head>
   <body>
@@ -138,7 +175,7 @@
       <hr class="break" />
       <fieldset>
         <legend>Suppliers Record Insert</legend>
-        <form action="submit-form.php" method="POST" class="record-form">
+        <form action="/CNT4714-Project4/suppliersinsert" method="POST" class="record-form">
           <table>
             <tr>
               <th><label for="snum">snum</label></th>
@@ -147,7 +184,7 @@
               <th><label for="city">city</label></th>
             </tr>
             <tr>
-              <td><input type="number" id="snum" name="snum" /></td>
+              <td><input type="text" id="snum" name="snum" /></td>
               <td><input type="text" id="sname" name="sname" /></td>
               <td><input type="text" id="status" name="status" /></td>
               <td><input type="text" id="city" name="city" /></td>
@@ -170,20 +207,20 @@
       </fieldset>
       <fieldset>
         <legend>Parts Record Insert</legend>
-        <form action="submit-form.php" method="POST" class="record-form">
+        <form action="/CNT4714-Project4/partsinsert" method="POST" class="record-form">
           <table>
             <tr>
               <th><label for="pnum">pnum</label></th>
-              <th><label for="pnum">pnum</label</th>
+              <th><label for="pnum">pname</label</th>
               <th><label for="color">color</label</th>
               <th><label for="weight">weight</label</th>
                 <th><label for="city">city</label</th>
             </tr>
             <tr>
-              <td><input type="number" id="pnum" name="pnum" /></td>
+              <td><input type="text" id="pnum" name="pnum" /></td>
               <td><input type="text" id="pname" name="pname" /></td>
               <td><input type="text" id="color" name="color" /></td>
-              <td><input type="text" id="weight" name="weight" /></td>
+              <td><input type="number" id="weight" name="weight" /></td>
               <td><input type="text" id="city" name="city" /></td>
             </tr>
           </table>
@@ -204,7 +241,7 @@
       </fieldset>
       <fieldset>
         <legend>Jobs Record Insert</legend>
-        <form action="submit-form.php" method="POST" class="record-form">
+        <form action="/CNT4714-Project4/jobsinsert" method="POST" class="record-form">
           <table>
             <tr>
               <th><label for="jnum">jnum</label></th>
@@ -213,7 +250,7 @@
               <th><label for="city">city</label></th>
             </tr>
             <tr>
-              <td><input type="number" id="jnum" name="jnum" /></td>
+              <td><input type="text" id="jnum" name="jnum" /></td>
               <td><input type="text" id="jname" name="jname" /></td>
               <td><input type="text" id="numworkers" name="numworkers" /></td>
               <td><input type="text" id="city" name="city" /></td>
@@ -236,7 +273,7 @@
       </fieldset>
       <fieldset>
         <legend>Shipments Record Insert</legend>
-        <form action="submit-form.php" method="POST" class="record-form">
+        <form action="/CNT4714-Project4/shipmentsinsert" method="POST" class="record-form">
           <table>
             <tr>
               <th><label for="snum">snum</label></th>
@@ -245,9 +282,9 @@
               <th><label for="quantity">quantity</label></th>
             </tr>
             <tr>
-              <td><input type="number" id="snum" name="snum" /></td>
-              <td><input type="number" id="pnum" name="pnum" /></td>
-              <td><input type="number" id="jnum" name="jnum" /></td>
+              <td><input type="text" id="snum" name="snum" /></td>
+              <td><input type="text" id="pnum" name="pnum" /></td>
+              <td><input type="text" id="jnum" name="jnum" /></td>
               <td><input type="number" id="quantity" name="quantity" /></td>
             </tr>
           </table>
@@ -268,6 +305,16 @@
       </fieldset>
       <div>
         <p>Database Results:</p>
+        <div <% if (!rowsUpdatedMessage.isEmpty()) { %>
+          class="sql-updated-message"<%} else {%>style="display:none" <%}%>>
+          <p><%=rowsUpdatedMessage%></p>
+        </div>
+
+        <div <% if (!returnMessage.isEmpty()) { %>
+          class="sql-error-message"<%} else {%>style="display:none" <%}%>>
+          <h4>Error in executing SQL statement:</h4>
+          <p><%=returnMessage%></p>
+        </div>
       </div>
     </div>
   </body>

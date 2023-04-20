@@ -1,3 +1,9 @@
+/* Name: Christopher Santiago
+ Course: CNT 4714 – Spring 2023 – Project Four
+ Assignment title: A Three-Tier Distributed Web-Based Application
+ Date: April 23, 2023
+*/
+
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.*;
@@ -9,9 +15,7 @@ public class authenticationServlet extends HttpServlet{
 			String inBoundUserName = request.getParameter("username");
 			String inBoundPassword = request.getParameter("password");
 			
-//			this.getServletContext().getRealPath("WEB-INF/lib/credentials.txt");
 			boolean userCredentialsOK = false;
-//			File file = new File("C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1_Tomcat1017\\webapps\\CNT4714-Project4\\WEB-INF\\lib\\credentials.txt");
 			File file = new File(this.getServletContext().getRealPath("WEB-INF/lib/credentials.txt"));
 			Scanner scanner;
 			try {
@@ -25,7 +29,6 @@ public class authenticationServlet extends HttpServlet{
 					   }
 				}
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -34,6 +37,5 @@ public class authenticationServlet extends HttpServlet{
 			} else {
 				response.sendRedirect("error-page.html");
 			}
-			
 	   } //end doGet() method
 }

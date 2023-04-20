@@ -48,6 +48,7 @@ public class ClientUserServlet extends HttpServlet{
 					} else {
 						// try another type of command other than select
 						try {
+							@SuppressWarnings("unused")
 							int numRowUpdated = stmt.executeUpdate(sqlStatement);
 						} catch (SQLException e1) {
 							// sqlexception. return error message for user
@@ -71,7 +72,7 @@ public class ClientUserServlet extends HttpServlet{
 		}
 	}// end of doPost
 	
-	MysqlDataSource setDataSource() {
+	private MysqlDataSource setDataSource() {
 		MysqlDataSource dataSource = null;
 		FileInputStream filein = null;
 		Properties properties = new Properties();
@@ -97,7 +98,7 @@ public class ClientUserServlet extends HttpServlet{
 		return dataSource;
 	} //end of setDataSource
 	
-	StringBuilder setHTMLTable( ResultSet rs) throws SQLException {
+	private StringBuilder setHTMLTable( ResultSet rs) throws SQLException {
 		StringBuilder html = null;
 		 // Get the column names from the result set metadata
 		ResultSetMetaData metaData = (ResultSetMetaData) rs.getMetaData();
@@ -129,7 +130,7 @@ public class ClientUserServlet extends HttpServlet{
 	}// end of setHTMLTable
 	
 	
-	void returnSQLException(HttpServletRequest request, HttpServletResponse response, SQLException e1, String sqlStatement) throws ServletException, IOException {
+	private void returnSQLException(HttpServletRequest request, HttpServletResponse response, SQLException e1, String sqlStatement) throws ServletException, IOException {
 		String returnMessage = "";
 		returnMessage = e1.getMessage();
 		HttpSession session = request.getSession();
@@ -142,7 +143,7 @@ public class ClientUserServlet extends HttpServlet{
 	} // end of returnSQLException
 	
 	
-	void returnToClient(HttpServletRequest request, HttpServletResponse response, String returnMessage, StringBuilder table, String sqlStatement ) throws ServletException, IOException {
+	private void returnToClient(HttpServletRequest request, HttpServletResponse response, String returnMessage, StringBuilder table, String sqlStatement ) throws ServletException, IOException {
 		String returnTable = null;
 		if(table != null) {
 			returnTable = table.toString();

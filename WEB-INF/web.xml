@@ -45,5 +45,48 @@
                   <url-pattern>/rootuser</url-pattern>
                </servlet-mapping>
 
+      <servlet>
+         <servlet-name>SupplierInsert</servlet-name>
+         <description> A servlet that handles data entry user insert commands into suppliers table. </description>
+         <servlet-class> SupplierInsertServlet  </servlet-class>
+      </servlet>
+
+               <servlet-mapping>
+                  <servlet-name>SupplierInsert</servlet-name>
+                  <url-pattern>/suppliersinsert</url-pattern>
+               </servlet-mapping>
+
+      <servlet>
+         <servlet-name>PartInsert</servlet-name>
+         <description> A servlet that handles data entry user insert commands into parts table. </description>
+         <servlet-class> PartInsertServlet  </servlet-class>
+      </servlet>
+
+               <servlet-mapping>
+                  <servlet-name>PartInsert</servlet-name>
+                  <url-pattern>/partsinsert</url-pattern>
+               </servlet-mapping>
+
+      <servlet>
+         <servlet-name>JobInsert</servlet-name>
+         <description> A servlet that handles data entry user insert commands into jobs table. </description>
+         <servlet-class> JobInsertServlet  </servlet-class>
+      </servlet>
+
+               <servlet-mapping>
+                  <servlet-name>JobInsert</servlet-name>
+                  <url-pattern>/jobsinsert</url-pattern>
+               </servlet-mapping>
+
+      <servlet>
+         <servlet-name>ShipmentInsert</servlet-name>
+         <description> A servlet that handles data entry user insert commands into shipments table. </description>
+         <servlet-class> ShipmentInsertServlet  </servlet-class>
+      </servlet>
+
+               <servlet-mapping>
+                  <servlet-name>ShipmentInsert</servlet-name>
+                  <url-pattern>/shipmentsinsert</url-pattern>
+               </servlet-mapping>
 
 </web-app>

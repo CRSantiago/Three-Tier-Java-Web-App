@@ -1,4 +1,11 @@
+/* Name: Christopher Santiago
+ Course: CNT 4714 – Spring 2023 – Project Four
+ Assignment title: A Three-Tier Distributed Web-Based Application
+ Date: April 23, 2023
+*/
+
 import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -66,6 +73,12 @@ public class RootUserServlet extends HttpServlet{
 						         // Execute the insert statement
 						            setNumRowsUpdated(stmt.executeUpdate(sqlStatement));
 						            
+						            
+						            /*
+						             * business/application logic
+						             * This logic will increment by 5, the status of a supplier anytime that supplier is involved in the insertion/update of a shipment record in which the quantity is greater than or equal to 100. 
+						             * 
+						             * */
 						            // Check if the inserted quantity is greater than or equal to 100
 						            int quantity = Integer.parseInt(resultSplit[3].trim());
 						            if (quantity >= 100) {
@@ -77,9 +90,23 @@ public class RootUserServlet extends HttpServlet{
 						                
 						                // Execute the update statement
 						                setBusinessLogicRowsUpdated(updateStatement.executeUpdate());
-							      }
+							      } 
 							    }
-							} else {
+							} else if(sqlStatement.contains("update") && sqlStatement.contains("shipments")) {
+								int totalRowsUpdated = 0;
+								totalRowsUpdated += stmt.executeUpdate(sqlStatement);
+								String updateSuppliersString = "UPDATE suppliers\r\n"
+				                		+ "SET status = status + 5\r\n"
+				                		+ "WHERE snum IN (\r\n"
+				                		+ "  SELECT snum\r\n"
+				                		+ "  FROM shipments\r\n"
+				                		+ "  WHERE quantity >= 100\r\n"
+				                		+ ");";
+								PreparedStatement updateSuppliersStatement = connection.prepareStatement(updateSuppliersString);
+								totalRowsUpdated += updateSuppliersStatement.executeUpdate();
+								
+								setNumRowsUpdated(totalRowsUpdated);
+							}else {
 								setBusinesLogicDetected(false);
 								setNumRowsUpdated(stmt.executeUpdate(sqlStatement));
 							}
